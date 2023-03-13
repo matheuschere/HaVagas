@@ -1,11 +1,14 @@
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.havagas.R
+import com.example.havagas.databinding.ActivityMainBinding
 
 class CadastroActivity : AppCompatActivity() {
 
@@ -25,8 +28,47 @@ class CadastroActivity : AppCompatActivity() {
     private lateinit var orientadorEditText: EditText
     private lateinit var vagasInteresseEditText: EditText
 
+    companion object{
+        val TAG = "CICLO_PDM"
+        val NOME = ""
+    }
+    private val alb: ActivityMainBinding by lazy{
+        ActivityMainBinding.inflate(layoutInflater)
+    }
+
+    override fun onStart(){
+        super.onStart()
+        Log.v(CadastroActivity.TAG, "Cadastro activity - onStart: Iniciando ciclo de vida VISÍVEL")
+    }
+    override fun onResume(){
+        super.onResume()
+        Log.v(CadastroActivity.TAG, "Cadastro activity - onResume Iniciando ciclo de vida EM PRIMEIRO PLANO")
+    }
+    override fun onRestart(){
+        super.onRestart()
+        Log.v(CadastroActivity.TAG, "Cadastro activity - onRestart Preparando execução do onStart")
+    }
+    override fun onPause(){
+        super.onPause()
+        Log.v(CadastroActivity.TAG, "Cadastro activity - onPause: Finalizando ciclo de vida em primeiro plano")
+    }
+    override fun onStop(){
+        super.onStop()
+        Log.v(CadastroActivity.TAG, "Cadastro activity - onStop Finalizando ciclo de vida VISÍVEL")
+    }
+    override fun onDestroy(){
+        super.onDestroy()
+        Log.v(CadastroActivity.TAG, "Cadastro activity - onDestroy: Finalizando!!")
+    }
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
+
+
+        supportActionBar?.subtitle = "Login"
+
+        val mainIntent = Intent(this, CadastroActivity::class.java)
+        startActivity(mainIntent)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
